@@ -1,0 +1,49 @@
+Time: O(h)
+Space: O(h)
+
+class Solution {
+    
+    class Pair{
+        TreeNode node;
+        int val;
+        public Pair(TreeNode node, int val)
+        {
+            this.node = node;
+            this.val = val;
+        }
+        public TreeNode getKey()
+        {
+            return this.node;
+        }
+        public int getValue()
+        {
+            return this.val;
+        }
+    }
+    public int sumNumbers(TreeNode root) {
+       
+        Stack<Pair> st = new Stack<>();
+        int result = 0;
+        int sum =0;
+        while(root != null || !st.isEmpty())
+        {
+            while(root != null)
+            {
+                sum = sum * 10 + root.val;
+                st.push(new Pair(root,sum));
+                root = root.left;
+            }
+    
+    
+        Pair p = st.pop();
+        root = p.getKey();
+        sum = p.getValue();
+        if(root.left == null && root.right == null)
+        result = result + sum;
+        root = root.right;
+        } 
+       
+         return result;
+    }
+   
+}
